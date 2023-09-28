@@ -1,0 +1,17 @@
+It shall be verified that URL redirects and forwards do not include unvalidated data.
+It shall be verified that filenames and path data obtained from untrusted sources are canonicalized to eliminate path traversal attacks.
+It shall be verified that files obtained from untrusted sources are scanned by antivirus scanners to prevent the upload of known malicious content.
+It shall be verified that parameters obtained from untrusted sources are not used in manipulating filenames, pathnames or any file system object without first being canonicalized and input validated to prevent local file inclusion attacks.
+It shall be verified that parameters obtained from untrusted sources are canonicalized, input validated, and output encoded to prevent remote file inclusion attacks, particularly where input could be executed, such as header, source, or template inclusion.
+It shall be verified that sharing remote IFRAMEs and HTML 5 resources across domains does not allow the inclusion of arbitrary remote content.
+It shall be verified that files obtained from untrusted sources are stored outside the webroot.
+It shall be verified that web or application server is configured by default to deny access to remote resources or systems outside the web or application server.
+It shall be verified the application code does not execute uploaded data obtained from untrusted sources.
+It shall be verified that Flash, Silverlight or other Rich Internet Application (RIA) cross-domain resource sharing configuration is set to prevent unauthenticated or unauthorized remote access.
+It shall be verified that file types allowed for upload are limited to business purpose and needs only (e.g., PDF and office documents).
+It shall be verified that file type validation is performed not only by checking file headers but also by checking file extension names.
+It shall be verified that execution privileges are turned off on file upload directories.
+It shall be verified that application files and resources are read-only by default.
+It shall be verified that all unnecessary shares and administrative shares are removed, and that access to required shares is either restricted or requires authentication.
+Authentication shall be required before allowing a file to be uploaded.
+Size of files that can be uploaded shall be limited to the size that is needed for business purposes only (for example, maximum 1 MB), and a note shall be added on the web page for the accepted file sizes.
