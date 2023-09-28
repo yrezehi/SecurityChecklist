@@ -1,0 +1,9 @@
+It shall be verified that a path can be built from a trusted CA to each Transport Layer Security (TLS) server certificate, and that each server certificate is valid.
+It shall be verified that the latest version of TLS is used for all connections (including both external and backend connections) that are authenticated or involve protected data or functions.
+It shall be verified that backend TLS connection failures are logged.
+It shall be verified that all connections to external systems that involve protected information or functions are authenticated.
+It shall be verified that all connections to external systems that involve protected information or functions use an account that has been set up to have the minimum privileges necessary for the application to function properly.
+It shall be verified that failed TLS connections do not fall back to an insecure connection.
+It shall be verified that certificate paths are built and verified for all client certificates using configured trust anchors and revocation information.
+It shall be verified that there is a single standard TLS implementation that is used by the application and configured to operate in an approved mode of operation.
+It shall be verified that specific character encodings are defined for all connections (e.g., UTF-8).
