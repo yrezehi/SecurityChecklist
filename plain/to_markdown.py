@@ -8,7 +8,7 @@ markdown_output_file_name = "generated.md"
 
 def read_file(file_path):
     with codecs.open(file_path, "r", "utf-8") as file:
-        return [line.replace("\n", "") for line in file]
+        return file.readlines()
 
 def get_file_path(file_name):
     return folder + file_name
@@ -19,8 +19,8 @@ def file_to_markdown_table(file_name):
 def to_markdown_table(content):
     lines = []
     for content_line in content:
-        lines.append("| " + content_line + " |")
-    return "".join(lines)
+        lines.append("| " + content_line.replace("\r\n", "") + " |")
+    return "\n".join(lines)
 
 def build_header():
     return "| Issue |\n| ------------- |\n"
