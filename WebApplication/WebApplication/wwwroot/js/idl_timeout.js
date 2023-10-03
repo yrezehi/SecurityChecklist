@@ -1,30 +1,35 @@
-(function () {
+var idleTimeout = function () {
 
     // 15 minutes of idle time is allowed 900000
     var idleTime = 5000;
     // function to trigger logout on hit of time out
     var timeoutInterval;
+    var timeoutCallback;
 
-    function setupEvents() {
-        window.onload = resetIdle;
-        window.onmousemove = resetIdle;
-        window.onmousedown = resetIdle;
-        window.ontouchstart = resetIdle;
-        window.ontouchmove = resetIdle;
-        window.onclick = resetIdle;
-        window.onkeydown = resetIdle;
-        window.addEventListener('scroll', resetIdle, true);
+    function listeners() {
+        window.onload = reset;
+        window.onmousemove = reset;
+        window.onmousedown = reset;
+        window.ontouchstart = reset;
+        window.ontouchmove = reset;
+        window.onclick = reset;
+        window.onkeydown = reset;
+        window.addEventListener('scroll', reset, true);
     }
 
-    function resetIdle() {
+    function reset() {
         clearTimeout(timeoutInterval);
         timeoutInterval = setTimeout(timeoutCallback, idleTime);
     }
 
-    function timeoutCallback() {
-        alert("I'm out!");
+    function register(callback) {
+        timeoutCallback = callback;
+        listeners();
     }
 
-    setupEvents();
-
-})();
+    return function () {
+        return {
+            register: register,
+        };
+    }();
+}();

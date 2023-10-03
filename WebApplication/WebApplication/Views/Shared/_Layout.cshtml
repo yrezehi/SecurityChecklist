@@ -47,6 +47,12 @@
 
     <script src="~/js/idl_timeout.js" asp-append-version="true"></script>
 
+    <script>
+        idleTimeout.register(function () {
+            console.log("Logging due inactivity");
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
