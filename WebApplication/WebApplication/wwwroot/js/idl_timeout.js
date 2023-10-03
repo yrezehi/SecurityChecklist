@@ -1,12 +1,12 @@
 var idleTimeout = function () {
+    // 15 minutes of idle time is allowed
+    var idleTime = 900000;
 
-    // 15 minutes of idle time is allowed 900000
-    var idleTime = 5000;
     // function to trigger logout on hit of time out
     var timeoutInterval;
     var timeoutCallback;
 
-    function listeners() {
+    function registerListeners() {
         window.onload = reset;
         window.onmousemove = reset;
         window.onmousedown = reset;
@@ -24,7 +24,7 @@ var idleTimeout = function () {
 
     function register(callback) {
         timeoutCallback = callback;
-        listeners();
+        registerListeners();
     }
 
     return function () {
