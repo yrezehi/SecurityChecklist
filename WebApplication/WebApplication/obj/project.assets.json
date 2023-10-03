@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Administrator\\Documents\\Projects\\SecurityChecklist\\WebApplication\\WebApplication\\WebApplication.csproj",
-      "projectName": "WebApplication",
-      "projectPath": "C:\\Users\\Administrator\\Documents\\Projects\\SecurityChecklist\\WebApplication\\WebApplication\\WebApplication.csproj",
+      "projectUniqueName": "C:\\Users\\Administrator\\Documents\\Projects\\SecurityChecklist\\WebApplication\\WebApplication\\Application.csproj",
+      "projectName": "Application",
+      "projectPath": "C:\\Users\\Administrator\\Documents\\Projects\\SecurityChecklist\\WebApplication\\WebApplication\\Application.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Administrator\\Documents\\Projects\\SecurityChecklist\\WebApplication\\WebApplication\\obj\\",
       "projectStyle": "PackageReference",
