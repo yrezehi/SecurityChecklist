@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace Application.Controllers
+namespace Application.Events
 {
     public class CookieAuthenticationEvent : CookieAuthenticationEvents
     {
@@ -25,7 +25,5 @@ namespace Application.Controllers
         {
             return base.SigningOut(context);
         }
-
-
     }
 }
