@@ -6,7 +6,6 @@ namespace Application.Events.Handlers
     {
         public ConcurrentDictionary<string, int> FailedAttempts;
         private static int ALLOWED_FAILED_ATTEMPTS = 5;
-
         
         public FailedAttemptsEventHandler() =>
             FailedAttempts = new ConcurrentDictionary<string, int>();
