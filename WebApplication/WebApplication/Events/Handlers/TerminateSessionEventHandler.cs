@@ -1,13 +1,14 @@
 ﻿using System.Collections.Concurrent;
+using System.Linq;
 
 namespace Application.Events.Handlers
 {
     public class TerminateSessionEventHandler
     {
-        public ConcurrentBag<string> TerminatedSessions;
+        public ConcurrentDictionary <string, DateTime> TerminatedSessions;
 
         public TerminateSessionEventHandler() =>
-            TerminatedSessions = new ConcurrentBag<string>();
+            TerminatedSessions = new();
 
         public void Terminate(HttpContext httpContext)
         {
@@ -15,8 +16,20 @@ namespace Application.Events.Handlers
             {
                 var requestCookie = httpContext.Request.Cookies.FirstOrDefault(cookie => cookie.Key.Contains(".AspNetCore."));
 
-                TerminatedSessions.Add(requestCookie.Value);
+                TerminatedSessions.TryAdd(requestCookie.Value, DateTime.Now);
             }
+        }
+
+        public bool IsSessionTerminated(HttpContext httpContext)
+        {
+            if (httpContext.Request.Cookies.Count > 0)
+            {
+                var requestCookie = httpContext.Request.Cookies.FirstOrDefault(cookie => cookie.Key.Contains(".AspNetCore."));
+
+                return TerminatedSessions.ContainsKey(requestCookie.Value);
+            }
+
+            return false;
         }
     }
 }
