@@ -1,14 +1,23 @@
-﻿using System.Collections.Concurrent;
+﻿using Application.Cache;
+using System.Collections.Concurrent;
 
 namespace Application.Events.Handlers
 {
     public class FailedAttemptsEventHandler
     {
-        public ConcurrentDictionary<string, int> FailedAttempts;
+        private readonly ConcurrentDictionary<string, int> FailedAttempts;
+        private readonly CacheManager CacheManager;
+
+        private static string CACHE_KEY = "FAILED_ATTEMPTS";
         private static int ALLOWED_FAILED_ATTEMPTS = 5;
-        
-        public FailedAttemptsEventHandler() =>
+
+        public FailedAttemptsEventHandler(CacheManager cacheManager)
+        {
+            CacheManager = cacheManager;
             FailedAttempts = new ConcurrentDictionary<string, int>();
+
+            CacheManager.CreateCache(CACHE_KEY);
+        }
 
         public void ResetFailedAttempts(string ip) =>
             FailedAttempts.Remove(ip, out _);

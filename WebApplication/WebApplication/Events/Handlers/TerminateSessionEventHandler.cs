@@ -1,13 +1,22 @@
-﻿using System.Collections.Concurrent;
+﻿using Application.Cache;
+using System.Collections.Concurrent;
 
 namespace Application.Events.Handlers
 {
     public class TerminateSessionEventHandler
     {
-        public ConcurrentDictionary <string, DateTime> TerminatedSessions;
+        private readonly ConcurrentDictionary <string, DateTime> TerminatedSessions;
+        private readonly CacheManager CacheManager;
 
-        public TerminateSessionEventHandler() =>
+        private static string CACHE_KEY = "TERMINATED_SESSIONS";
+
+        public TerminateSessionEventHandler(CacheManager cacheManager)
+        {
+            CacheManager = cacheManager;
             TerminatedSessions = new();
+
+            CacheManager.CreateCache(CACHE_KEY);
+        }
 
         public void Terminate(HttpContext httpContext)
         {
