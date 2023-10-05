@@ -5,7 +5,6 @@ namespace Application.Events.Handlers
 {
     public class FailedAttemptsEventHandler
     {
-        private readonly ConcurrentDictionary<string, int> FailedAttempts;
         private readonly CacheManager CacheManager;
 
         private static string CACHE_KEY = "FAILED_ATTEMPTS";
@@ -14,19 +13,18 @@ namespace Application.Events.Handlers
         public FailedAttemptsEventHandler(CacheManager cacheManager)
         {
             CacheManager = cacheManager;
-            FailedAttempts = new();
 
             CacheManager.CreateCache(CACHE_KEY);
         }
 
         public void ResetFailedAttempts(string ip) =>
-            FailedAttempts.Remove(ip, out _);
+            CacheManager.Remove(CACHE_KEY, ip);
 
         public bool ShouldLockout(string ip)
         {
-            if (FailedAttempts.ContainsKey(ip))
+            if (CacheManager.Contains(CACHE_KEY, ip))
             {
-                return FailedAttempts[ip] >= ALLOWED_FAILED_ATTEMPTS;
+                return CacheManager.Get<int>(CACHE_KEY, ip) >= ALLOWED_FAILED_ATTEMPTS;
             }
 
             return false;
@@ -34,16 +32,16 @@ namespace Application.Events.Handlers
 
         public int FailedAttempt(string ip)
         {
-            if (FailedAttempts.ContainsKey(ip))
+            if (CacheManager.Contains(CACHE_KEY, ip))
             {
-                var failedAttemptsCount = FailedAttempts[ip];
+                var failedAttemptsCount = CacheManager.Get<int>(CACHE_KEY, ip);
 
-                FailedAttempts.TryUpdate(ip, failedAttemptsCount + 1, failedAttemptsCount++);
+                //FailedAttempts.TryUpdate(ip, failedAttemptsCount + 1, failedAttemptsCount++);
 
                 return failedAttemptsCount;
             }
 
-            FailedAttempts.TryAdd(ip, 1);
+            CacheManager.Set(CACHE_KEY, ip, 1);
 
             return 1;
         }
