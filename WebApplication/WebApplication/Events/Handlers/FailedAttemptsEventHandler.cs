@@ -14,7 +14,7 @@ namespace Application.Events.Handlers
         public FailedAttemptsEventHandler(CacheManager cacheManager)
         {
             CacheManager = cacheManager;
-            FailedAttempts = new ConcurrentDictionary<string, int>();
+            FailedAttempts = new();
 
             CacheManager.CreateCache(CACHE_KEY);
         }

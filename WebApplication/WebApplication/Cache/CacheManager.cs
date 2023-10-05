@@ -38,5 +38,8 @@ namespace Application.Cache
 
         public T? Get<T>(string name, string key) =>
             this.GetCache(name).TryGetValue(key, out T? value) ? value : default;
+
+        public bool ContainsValue(string name, string value) => 
+            this.GetCache(name).
     }
 }

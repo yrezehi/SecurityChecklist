@@ -5,17 +5,15 @@ namespace Application.Events.Handlers
 {
     public class TerminateSessionEventHandler
     {
-        private readonly ConcurrentDictionary <string, DateTime> TerminatedSessions;
         private readonly CacheManager CacheManager;
 
-        private static string CACHE_KEY = "TERMINATED_SESSIONS";
+        private static string CACHE_NAME = "TERMINATED_SESSIONS";
 
         public TerminateSessionEventHandler(CacheManager cacheManager)
         {
             CacheManager = cacheManager;
-            TerminatedSessions = new();
 
-            CacheManager.CreateCache(CACHE_KEY);
+            CacheManager.CreateCache(CACHE_NAME);
         }
 
         public void Terminate(HttpContext httpContext)
@@ -24,7 +22,7 @@ namespace Application.Events.Handlers
             {
                 var requestCookie = httpContext.Request.Cookies.FirstOrDefault(cookie => cookie.Key.Contains(".AspNetCore."));
 
-                TerminatedSessions.TryAdd(requestCookie.Value, DateTime.Now);
+                CacheManager.Set(CACHE_NAME, requestCookie.Value, DateTime.Now);
             }
         }
 
@@ -34,7 +32,7 @@ namespace Application.Events.Handlers
             {
                 var requestCookie = httpContext.Request.Cookies.FirstOrDefault(cookie => cookie.Key.Contains(".AspNetCore."));
 
-                return TerminatedSessions.ContainsKey(requestCookie.Value);
+                return CacheManager.Contains(CACHE_NAME, requestCookie.Value);
             }
 
             return false;
