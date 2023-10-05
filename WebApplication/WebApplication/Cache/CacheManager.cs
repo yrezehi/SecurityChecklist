@@ -38,5 +38,17 @@ namespace Application.Cache
 
         public T? Get<T>(string name, string key) =>
             this.GetCache(name).TryGetValue(key, out T? value) ? value : default;
+
+        public int Increment(string name, string key)
+        {
+            if (this.Contains(name, key))
+            {
+                int previousValue = this.Get<int>(name, key);
+                this.Set<int>(name, key, previousValue + 1);
+                return previousValue + 1;
+            }
+            return 1;
+        }
+
     }
 }

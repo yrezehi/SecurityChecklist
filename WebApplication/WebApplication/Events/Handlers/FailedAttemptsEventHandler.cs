@@ -36,7 +36,7 @@ namespace Application.Events.Handlers
             {
                 var failedAttemptsCount = CacheManager.Get<int>(CACHE_KEY, ip);
 
-                //FailedAttempts.TryUpdate(ip, failedAttemptsCount + 1, failedAttemptsCount++);
+                CacheManager.Increment(CACHE_KEY, ip);
 
                 return failedAttemptsCount;
             }
