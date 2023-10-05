@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace Application.Cache
 {
