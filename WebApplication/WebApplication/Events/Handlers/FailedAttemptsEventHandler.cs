@@ -18,7 +18,7 @@ namespace Application.Events.Handlers
         public void ResetFailedAttempts(string ip) =>
             CacheManager.Remove(CACHE_KEY, ip);
 
-        public bool ShouldLockout(string ip)
+        public bool IsLocked(string ip)
         {
             if (CacheManager.Contains(CACHE_KEY, ip))
             {
