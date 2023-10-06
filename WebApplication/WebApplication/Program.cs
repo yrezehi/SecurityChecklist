@@ -1,10 +1,13 @@
 using Application.Cache;
 using Application.Events.Handlers;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddSingleton(typeof(CacheManager), typeof(CacheManager));
 
