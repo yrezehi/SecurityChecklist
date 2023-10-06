@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using Application.Models;
 
 namespace Application.Services
 {
@@ -8,31 +9,18 @@ namespace Application.Services
     {
         private readonly IHttpContextAccessor HttpContextAccessor;
 
-        public AuthenticationService(IHttpContextAccessor httpContextAccessor) {
+        public AuthenticationService(IHttpContextAccessor httpContextAccessor)
+        {
             HttpContextAccessor = httpContextAccessor;
         }
 
         public bool IsAuthenticated()
         {
-            return false;
+            return true;
         }
 
         public async Task SignIn()
         {
-            var claimsIdentity = new ClaimsIdentity(new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, "Email"),
-                new Claim("FullName", "Full Name"),
-                new Claim(ClaimTypes.Role, "Administrator"),
-            }, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var authProperties = new AuthenticationProperties
-            {
-                AllowRefresh = true,
-                IssuedUtc = DateTimeOffset.Now,
-                //RedirectUri = <string> // TODO: try it out
-            };
-
             HttpContext? httpContext = HttpContextAccessor.HttpContext;
 
             if (httpContext == null)
@@ -40,9 +28,27 @@ namespace Application.Services
 
             await httpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties
+                GetClaimsPrincipal(null),
+                GetProperties()
             );
         }
+
+        private AuthenticationProperties GetProperties() => new AuthenticationProperties
+        {
+            AllowRefresh = true,
+            IssuedUtc = DateTimeOffset.Now,
+            //RedirectUri = <string> // TODO: try it out
+        };
+
+        private ClaimsPrincipal GetClaimsPrincipal(User user) =>
+            new ClaimsPrincipal(
+                new ClaimsIdentity(new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, "Email"),
+                    new Claim("FullName", "Full Name"),
+                    new Claim(ClaimTypes.Role, "Administrator"),
+                }, CookieAuthenticationDefaults.AuthenticationScheme)
+            );
+
     }
 }
