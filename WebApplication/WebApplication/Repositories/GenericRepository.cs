@@ -1,12 +1,13 @@
-﻿using Hisuh.Repositories.Interfaces;
+﻿using Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hisuh.Repositories
+namespace Application.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly DbContext Context;
         public DbSet<T> DBSet { get; }
+
 
         public GenericRepository(DbContext context)
         {

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Hisuh.Repositories.Extentions
+namespace Application.Repositories.Extentions
 {
     public static class LinqExtensions
     {

@@ -1,4 +1,6 @@
-﻿namespace Hisuh.Repositories.Interfaces
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Application.Repositories.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

@@ -1,7 +1,7 @@
 ﻿using Application.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Hisuh.Repositories
+namespace Application.Repositories
 {
     public class GenericRepositoryContext : DbContext
     {

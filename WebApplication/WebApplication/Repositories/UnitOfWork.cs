@@ -1,7 +1,7 @@
-﻿using Hisuh.Repositories.Interfaces;
+﻿using Application.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
-
-namespace Hisuh.Repositories
+namespace Application.Repositories
 {
     public class UnitOfWork<TContext> : IUnitOfWork<TContext>, IUnitOfWork where TContext : DbContext, IDisposable
     {
