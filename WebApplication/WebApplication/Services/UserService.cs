@@ -6,7 +6,7 @@ namespace Application.Services
     {
         public UserService() { }
 
-        public User GetById(int id) => new User();
+        public User GetById(int id) => new User(id);
 
         public User Update(User user) => user;
     }
