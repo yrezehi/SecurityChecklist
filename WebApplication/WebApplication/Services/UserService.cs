@@ -14,9 +14,9 @@ namespace Application.Services
         private readonly IUnitOfWork UnitOfWork;
 
         public UserService(IUnitOfWork unitOfWork) =>
-            DBSet = unitOfWork.Repository<User>().DBSet;
+            (UnitOfWork, DBSet) = (unitOfWork, unitOfWork.Repository<User>().DBSet);
 
-        public User? GetByIdFind(Expression<Func<User, bool>> expression) =>
+        public User? GetByExpression(Expression<Func<User, bool>> expression) =>
             DBSet.Where(expression).FirstOrDefault();
 
         public async Task<User> RefreshLastSignin(User user)
@@ -31,7 +31,7 @@ namespace Application.Services
 
                 await UnitOfWork.CompletedAsync();
 
-                return entityToUpdate;
+                return userToUpdate;
             }
 
             throw new ArgumentException("Entity Not Found");

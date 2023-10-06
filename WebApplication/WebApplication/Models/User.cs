@@ -7,4 +7,5 @@
         public string Email { get; set; }
         public bool Active { get; set; }
         public DateTime LastSignin { get; set; }
+    }
 }
