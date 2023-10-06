@@ -1,4 +1,5 @@
 using Application.Cache;
+using Application.Services;
 using Application.Events.Handlers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -10,9 +11,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddSingleton(typeof(CacheManager), typeof(CacheManager));
-
 builder.Services.AddSingleton(typeof(FailedAttemptsEventHandler), typeof(FailedAttemptsEventHandler));
 builder.Services.AddSingleton(typeof(TerminateSessionEventHandler), typeof(TerminateSessionEventHandler));
+
+builder.Services.AddTransient(typeof(UserService), typeof(UserService));
 
 var app = builder.Build();
 
