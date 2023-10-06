@@ -1,0 +1,6 @@
+Integrity checks, such as digital signatures, shall be implemented on any serialized objects to prevent hostile object creation or data tampering.
+Strict type constraints during deserialization shall be enforced before object creation as the code typically expects a definable set of classes. Bypasses to this technique have been demonstrated; therefore, reliance solely on this technique is not advisable.
+Code that deserializes shall be isolated and run in low privilege environments whenever possible.
+Deserialization exceptions and failures; such as the cases in which the incoming type is not the expected type, or the deserialization throws exceptions; shall be logged.
+Incoming and outgoing network connectivity from containers or servers that deserialize shall be restricted or monitored. 
+Deserialization shall be monitored, and an alert shall be issued if a user deserializes constantly.

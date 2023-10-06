@@ -44,8 +44,7 @@ namespace Application.Services
             new ClaimsPrincipal(
                 new ClaimsIdentity(new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, "Email"),
-                    new Claim("FullName", "Full Name"),
+                    new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, "Administrator"),
                 }, CookieAuthenticationDefaults.AuthenticationScheme)
             );

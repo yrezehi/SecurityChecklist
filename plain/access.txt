@@ -1,0 +1,20 @@
+It shall be verified that users can only access secured functions or services for which they possess specific authorization.
+It shall be verified that users can only access secured URLs for which they possess specific authorization.
+It shall be verified that users can only access secured data files for which they possess specific authorization.
+It shall be verified that direct object references are protected in a way that ensures only authorized objects are accessible to each user.
+It shall be verified that directory browsing is disabled unless required.
+It shall be verified that users can only access protected data for which they possess specific authorization (for example, by implementing controls to protect against direct object reference tampering and prevent unauthorized access to data).
+It shall be verified that access controls fail securely.
+It shall be verified that the same access control rules implied by the presentation layer are enforced on the server side for that user role, and that controls and parameters cannot be re-enabled or re-added by users with higher privileges.
+It shall be verified that all user and data attributes and policy information used by access controls cannot be manipulated by end users unless specifically authorized.
+It shall be verified that all access controls are enforced on the server side.
+It shall be verified that all access control decisions can be logged and all failed decisions are logged.
+It shall be verified that the application or framework generates strong random anti-CSRF tokens unique to the user as part of all high value transactions or accessing protected data, and that the application verifies the presence of such tokens with the proper value for the current user when processing these requests.
+Aggregate access control protection – It shall be verified that the system can protect against aggregate or continuous access of secured functions, resources, or data, possibly by the use of a resource governor, for example, to limit the number of registrations per hour or to prevent the entire database from being scraped by an individual user.
+It shall be verified that a centralized mechanism (including libraries that call external authorization services) is in place to control access to each type of protected resource.
+It shall be verified that there is segregation between privileged logic and other application code.
+Appropriate access controls shall be implemented for protected data stored on the server. This includes cached data, temporary files and data accessible only by specific system users.
+It shall be verified that service accounts or accounts supporting connections to or from external systems have the least privilege possible
+It shall be verified that account auditing is implemented and that unused accounts are disabled (for example, after more than 30 days from the expiration of an account’s password).
+If long authenticated sessions are allowed, a user’s authorization shall be periodically re-validated to ensure that their privileges have not changed. In case their privileges have changed, the user shall be logged out and forced to re-authenticate.
+It shall be verified that the application supports disabling of accounts and terminating sessions when authorization ceases (for example, upon changes to role, employment status, business process, etc.).

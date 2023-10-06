@@ -1,15 +1,12 @@
 ﻿using Application.Models;
-using Application.Repositories;
 using Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Security.Principal;
 
 namespace Application.Services
 {
     public class UserService
     {
-
         private readonly DbSet<User> DBSet;
         private readonly IUnitOfWork UnitOfWork;
 
@@ -19,9 +16,9 @@ namespace Application.Services
         public User? GetByExpression(Expression<Func<User, bool>> expression) =>
             DBSet.Where(expression).FirstOrDefault();
 
-        public async Task<User> RefreshLastSignin(User user)
+        public async Task<User> RefreshLastSignin(string? email)
         {
-            var userToUpdate = await DBSet.AsNoTracking().FirstOrDefaultAsync(entity => entity.Id == user.Id);
+            var userToUpdate = await DBSet.AsNoTracking().FirstOrDefaultAsync(entity => entity.Email.Equals(email));
 
             if (userToUpdate != null)
             {

@@ -1,0 +1,10 @@
+It shall be verified that all cryptographic functions used to protect secrets from the application user are implemented on the server side.
+It shall be verified that all cryptographic modules fail securely.
+It shall be verified that any master secret(s) is protected from unauthorized access (A master secret is an application credential stored as plaintext on disk that is used to protect access to security configuration information).
+It shall be verified that all random numbers, random file names, random GUIDs, and random strings are generated using the cryptographic module’s approved random number generator when these random values are intended to be unguessable by an attacker.
+It shall be verified that cryptographic modules used by the application have been validated as per relevant policies and procedures.
+It shall be verified that cryptographic modules operate in their approved mode in accordance with relevant policies and procedures.
+It shall be verified that there is an explicit policy for how cryptographic keys are managed (for example, generated, distributed, revoked, or expired), and that this policy is properly enforced.
+It shall be verified that non-repudiation through cryptography (digital signing) is present for financial or e-commerce transactions and records.
+It shall be verified that all cryptographic keys are adequately protected. If a key has been compromised, it shall no longer be trusted and shall be replaced or revoked.
+It shall be verified that Personally Identifiable Information (PII) and protected information and data are stored encrypted at rest.

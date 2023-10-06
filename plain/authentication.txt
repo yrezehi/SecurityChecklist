@@ -1,0 +1,40 @@
+It shall be verified that all pages and resources require authentication except those specifically intended to be public (Principle of Complete Mediation).
+It shall be verified that all password fields do not show users' passwords when entered, and that password fields (or the forms that contain them) have autocomplete disabled.
+It shall be verified that all authentication controls fail securely to ensure that attackers cannot log in.
+It shall be verified that credentials and all other identity information handled by the application do not traverse unencrypted or through weakly encrypted links.
+It shall be verified that forgot password and other recovery paths do not send the existing or new passwords in clear text to the user.
+It shall be verified that performing username enumeration is not possible via login, password reset, or forgot account functionalities.
+It shall be verified that there are no default passwords in use for the application framework or any components used by the application (such as “admin/password”).
+It shall be verified that a resource governor is in place to protect against vertical brute forcing (i.e., when a single account is tested against all possible passwords) and horizontal brute forcing (i.e., when all accounts are tested with the same password, such as “Password1”). A correct credential entry shall incur no delay. For example, brute force source IP address lockout shall be configured to 60 minutes and account lockout to 15 minutes. Both these governor mechanisms shall be active simultaneously to protect against diagonal and distributed attacks.
+It shall be verified that all authentication controls are enforced on the server side.
+It shall be verified that password entry fields allow or encourage the use of passphrases, and do not prevent the entry of long passphrases or highly complex passwords and provide a sufficient minimum strength to protect against the use of commonly chosen passwords.
+It shall be verified that all account management functions (such as registration, update profile, forgot username, forgot password, disabled/lost token, help desk or IVR) that might regain access to the account are at least as resistant to attacks as the primary authentication mechanism.
+It shall be verified that users can safely change their credentials using a mechanism that is at least as resistant to attacks as the primary authentication mechanism. Password changes shall require the existing password to be entered prior to entering a new password, followed by re-authentication of the user.
+It shall be verified that authentication credentials expire after an administratively configurable period of time. The password expiry duration shall be shorter based on the criticality of the application, thus ensuring a quicker password change.
+It shall be verified that all authentication decisions are logged, including linear back offs and soft-locks.
+It shall be verified that account passwords are salted using a salt that is unique to each account (e.g., internal user ID, account creation, etc.) and hashed before storing.
+It shall be verified that all authentication credentials for accessing external services for the application are encrypted and stored in a protected location (not in source code).
+It shall be verified that forgot password and other recovery paths send a time-limited activation token or use multi-factor authentication (e.g., SMS, tokens, mobile application, etc.) instead of a password.
+It shall be verified that “forget password” functionality does not lock or otherwise disable the account until after the user has successfully changed their password.
+It shall be verified that there are no shared knowledge questions/answers (Also called "secret" questions and answers).
+It shall be verified that the system can be configured to disallow the use of a configurable number of previous passwords
+It shall be verified that all authentication controls (including libraries that call external authentication services) have a centralized implementation.
+It shall be verified that re-authentication, step up or adaptive authentication, SMS or other two-factor application, or transaction signing is required before any application-specific sensitive operations are permitted as per the risk profile of the application.
+It shall be verified that a functionality to invalidate or disable user credentials in the event of a compromise is in place.
+It shall be verified that password encryption is implemented in accordance with relevant standards and procedures.
+If the application manages a credential store, it shall ensure that only cryptographically strong one-way salted hashes of passwords are stored and that the table/file that stores the passwords and keys is write-able only by the application. (If possible, MD5 algorithm shall not be used).
+Authentication logic shall be segregated from the resource being requested, and redirection to and from the centralized authentication control shall be used.
+Authentication failure responses shall not indicate which part of the authentication data is incorrect. For example, instead of "Invalid username" or "Invalid password", "Invalid username and/or password" shall be used for both. Error responses shall be truly identical in both display and source code.
+Password complexity requirements established by a policy or regulation shall be enforced. Authentication credentials shall be sufficient to withstand attacks that are typical of the threats in the deployed environment.
+Additionally, it shall be verified that passwords contain:
+At least 1 upper case character (A-Z)
+At least 1 lower case character (a-z)
+At least 1 digit  (9-0)
+At least 1 special character (e.g., “ !"#$%&'()*+,-/:;<=>?@[\]^_`{|}~”)
+It shall be verified that passwords do not contain:
+More than 2 identical digits or characters in a row (e.g., 111, aa, etc.)
+Sequential digits or characters (e.g., 123, 789, and abc)
+The same username
+Dictionary words (e.g., password, p@ssw0rd, secret123, etc.)
+Accounts shall be disabled after an established number of invalid login attempts (e.g., five attempts for non-critical applications and three attempts for critical applications). Accounts shall be disabled for a period of time sufficient to discourage brute force guessing of credentials, but not so long as to allow for a denial-of-service attack to be performed. (For example, disabled for 30 minutes).
+The last use (successful or unsuccessful) of a user account shall be reported to the user at their next successful login.
