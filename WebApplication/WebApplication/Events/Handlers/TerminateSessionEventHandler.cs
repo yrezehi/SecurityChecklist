@@ -1,5 +1,4 @@
 ﻿using Application.Cache;
-using System.Collections.Concurrent;
 
 namespace Application.Events.Handlers
 {
