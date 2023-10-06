@@ -7,6 +7,9 @@
         public string Email { get; set; }
         public bool Active { get; set; }
 
+        
+        public User() { }
+
         public User(int id) {
             Id = id;
             Name = "Name of the user";
