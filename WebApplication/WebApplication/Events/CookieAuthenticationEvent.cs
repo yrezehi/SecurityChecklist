@@ -1,5 +1,4 @@
 ﻿using Application.Events.Handlers;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Application.Events
