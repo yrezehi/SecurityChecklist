@@ -4,7 +4,7 @@ using Application.Events.Handlers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Application.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Application.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,17 +21,7 @@ builder.Services.AddSingleton(typeof(TerminateSessionEventHandler), typeof(Termi
 
 builder.Services.AddTransient(typeof(UserService), typeof(UserService));
 
-builder.Services.AddAuthentication(option =>
-{
-    option.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    option.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    option.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-}).Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
-{
-    options.Cookie.HttpOnly = true; // OWASP-A01
-    options.ExpireTimeSpan = TimeSpan.FromHours(60); // OWASP-A01
-    options.SlidingExpiration = false; // OWASP-A01
-});
+builder.RegisterSecurityLayer();
 
 var app = builder.Build();
 
