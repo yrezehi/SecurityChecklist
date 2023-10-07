@@ -1,4 +1,5 @@
 ﻿using Application.Cache;
+using Application.Extensions;
 
 namespace Application.Events.Handlers
 {
@@ -18,8 +19,12 @@ namespace Application.Events.Handlers
         {
             if(httpContext.Request.Cookies.Count > 0)
             {
-                var requestCookie = httpContext.Request.Cookies.FirstOrDefault(cookie => cookie.Key.Contains(".AspNetCore."));
-                CacheManager.Set(CACHE_NAME, requestCookie.Value, DateTime.Now);
+                var requestCookie = httpContext.GetCookieValue(".AspNetCore.");
+
+                if (requestCookie != null)
+                {
+                    CacheManager.Set(CACHE_NAME, requestCookie, DateTime.Now);
+                }
             }
         }
 
@@ -27,9 +32,14 @@ namespace Application.Events.Handlers
         {
             if (httpContext.Request.Cookies.Count > 0)
             {
-                var requestCookie = httpContext.Request.Cookies.FirstOrDefault(cookie => cookie.Key.Contains(".AspNetCore."));
-                return CacheManager.Contains(CACHE_NAME, requestCookie.Value);
+                var requestCookie = httpContext.GetCookieValue(".AspNetCore.");
+
+                if(requestCookie != null)
+                {
+                    return CacheManager.Contains(CACHE_NAME, requestCookie);
+                }
             }
+
             return false;
         }
     }

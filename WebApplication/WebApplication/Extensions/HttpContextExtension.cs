@@ -31,5 +31,7 @@ namespace Application.Extensions
         public static string? GetCalimValue(this HttpContext context, string type) =>
             context.User.FindFirstValue(type);
 
+        public static string? GetCookieValue(this HttpContext context, string key) =>
+            context.Request.Cookies.FirstOrDefault(cookie => cookie.Key.Contains(key)).Value;
     }
 }
