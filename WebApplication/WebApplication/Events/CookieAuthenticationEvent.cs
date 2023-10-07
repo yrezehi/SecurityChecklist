@@ -1,4 +1,5 @@
 ﻿using Application.Events.Handlers;
+using Application.Extensions;
 using Application.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
@@ -25,7 +26,7 @@ namespace Application.Events
 
         public async override Task SignedIn(CookieSignedInContext context)
         {
-            await UserService.RefreshLastSignin(context.HttpContext.User.FindFirstValue(ClaimTypes.Email));
+            await UserService.RefreshLastSignin(context.HttpContext.GetCalimValue(ClaimTypes.Email));
 
             await base.SignedIn(context);
         }

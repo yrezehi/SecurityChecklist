@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Net;
+using System.Security.Claims;
 
 namespace Application.Extensions
 {
@@ -16,17 +17,19 @@ namespace Application.Extensions
                 return ipAddress.ToString();
             } else if (context.Request.Headers.ContainsKey(FORWARDER_FOR_HEADER))
             {
-                return GetForwarderForAddressIP(context);
+                return context.GetForwarderForAddressIP();
             }
 
             return null;
         }
 
-        private static string? GetForwarderForAddressIP(HttpContext context)
-        {
-            return context!.Request.Headers.TryGetValue("X-Forwarder-For", out var ips)
+        private static string? GetForwarderForAddressIP(this HttpContext context) =>
+            context!.Request.Headers.TryGetValue("X-Forwarder-For", out var ips)
                     && IPAddress.TryParse(ips.FirstOrDefault()?.Split(',', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(), out IPAddress? clientIp)
                         ? (clientIp.ToString()) : null;
-        }
+
+        public static string? GetCalimValue(this HttpContext context, string type) =>
+            context.User.FindFirstValue(type);
+
     }
 }
