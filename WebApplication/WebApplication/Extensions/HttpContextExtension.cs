@@ -16,12 +16,17 @@ namespace Application.Extensions
                 return ipAddress.ToString();
             } else if (context.Request.Headers.ContainsKey(FORWARDER_FOR_HEADER))
             {
-                return context!.Request.Headers.TryGetValue("X-Forwarder-For", out var ips)
-                    && IPAddress.TryParse(ips.FirstOrDefault()?.Split(',', StringSplitOptions.RemoveEmptyEntries).First(), out IPAddress clientIp)
-                        ? clientIp.ToString() : "";
+                return GetForwarderForAddressIP(context);
             }
 
             return null;
+        }
+
+        private static string? GetForwarderForAddressIP(HttpContext context)
+        {
+            return context!.Request.Headers.TryGetValue("X-Forwarder-For", out var ips)
+                    && IPAddress.TryParse(ips.FirstOrDefault()?.Split(',', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(), out IPAddress? clientIp)
+                        ? (clientIp.ToString()) : null;
         }
     }
 }
