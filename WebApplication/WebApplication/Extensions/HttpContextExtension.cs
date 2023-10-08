@@ -33,5 +33,7 @@ namespace Application.Extensions
 
         public static string? GetCookieValue(this HttpContext context, string key) =>
             context.Request.Cookies.FirstOrDefault(cookie => cookie.Key.Contains(key)).Value;
+
+
     }
 }
