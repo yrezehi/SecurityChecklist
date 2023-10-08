@@ -2,7 +2,7 @@
 
 namespace Application.Extensions
 {
-    public static class SecurityExtensions
+    public static class RegisterSecurityExtensions
     {
         public static void RegisterSecurityLayer(this WebApplicationBuilder application)
         {
