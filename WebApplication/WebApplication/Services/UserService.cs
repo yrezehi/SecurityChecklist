@@ -38,7 +38,7 @@ namespace Application.Services
 
         public async Task<User> Authenticate(AuthenticationDTO authenticationDTO)
         {
-            var user = await this.GetByExpression(user => user.Email.Equals(authenticationDTO.Email));
+            var user = await this.GetByExpression(user => user.Email == authenticationDTO.Email);
 
             if(user == null)
             {

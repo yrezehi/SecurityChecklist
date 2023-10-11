@@ -6,6 +6,7 @@ using Application.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Application.Extensions;
 using Application.Repositories.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,8 +27,14 @@ builder.Services.AddTransient(typeof(UserService), typeof(UserService));
 builder.Services.AddTransient(typeof(AuthenticationService), typeof(AuthenticationService));
 
 builder.RegisterSecurityLayer();
-
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    using (var scope = app.Services.CreateScope())
+    using (var context = scope.ServiceProvider.GetService<GenericRepositoryContext>())
+        context!.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

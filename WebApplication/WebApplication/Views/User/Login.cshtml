@@ -2,14 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<form asp-action="login" asp-controller="user">
+<form asp-action="authenticate" asp-controller="user" method="post">
     <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email">
+        <input name="email" type="email" class="form-control" id="email">
     </div>
     <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password">
+        <input name="password" type="password" class="form-control" id="password">
     </div>
     <button type="submit" class="btn w-100 mt-2 btn-primary">Login</button>
 </form>

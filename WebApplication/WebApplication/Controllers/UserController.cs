@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Models.DTO;
+using Application.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Controllers
 {
@@ -6,19 +8,21 @@ namespace Application.Controllers
     public class UserController : Controller
     {
         private readonly ILogger<UserController> Logger;
+        private readonly UserService UserService;
 
-        public UserController(ILogger<UserController> logger) =>
-            Logger = logger;
+        public UserController(ILogger<UserController> logger, UserService userService) =>
+            (Logger, UserService) = (logger, userService);
 
         [HttpGet("[action]")]
         public IActionResult Login() =>
             View();
 
         [HttpPost("[action]")]
-        public IActionResult Authenticate()
-        {
+        public async Task<IActionResult> Authenticate(AuthenticationDTO authenticationDTO) {
 
-            return View();
+            await UserService.Authenticate(authenticationDTO);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
