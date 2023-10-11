@@ -15,13 +15,19 @@ namespace Application.Repositories
                 {
                     Id = 1,
                     Name = "Admin",
-                    Email = "admin@domain.com"
+                    Email = "admin@domain.com",
+                    Password = "admin",
+                    Active = true,
+                    Role = "Administrator"
                 },
                 new User
                 {
                     Id = 2,
                     Name = "Regular",
-                    Email = "regular@domain.com"
+                    Email = "regular@domain.com",
+                    Password = "password123",
+                    Active = true,
+                    Role = "User"
                 }
              );
         }

@@ -32,15 +32,15 @@ namespace Application.Services
             );
         }
 
-        private AuthenticationProperties AuthenticationProperties => new()
-            {
+        private AuthenticationProperties AuthenticationProperties => 
+            new () {
                 AllowRefresh = true,
                 IssuedUtc = DateTimeOffset.Now,
                 //RedirectUri = <string> // TODO: try it out
             };
 
         private ClaimsPrincipal GetClaimsPrincipal(User user) =>
-            new ClaimsPrincipal(
+            new (
                 new ClaimsIdentity(new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, user.Email),
