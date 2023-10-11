@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Application.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Application.Extensions;
+using Application.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<GenericRepositoryContext>(option => option.UseInMe
 builder.Services.AddControllersWithViews();
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork<GenericRepositoryContext>>();
 
 builder.Services.AddSingleton(typeof(CacheManager), typeof(CacheManager));
 builder.Services.AddSingleton(typeof(FailedAttemptsEventHandler), typeof(FailedAttemptsEventHandler));

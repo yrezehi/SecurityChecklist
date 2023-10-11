@@ -29,3 +29,8 @@ C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebAp
 C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebApplication\obj\Debug\net7.0\Application.pdb
 C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebApplication\obj\Debug\net7.0\Application.genruntimeconfig.cache
 C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebApplication\obj\Debug\net7.0\ref\Application.dll
+C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebApplication\bin\Debug\net7.0\web.config
+C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebApplication\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebApplication\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebApplication\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\Administrator\Documents\Projects\SecurityChecklist\WebApplication\WebApplication\obj\Debug\net7.0\Application.csproj.CopyComplete
