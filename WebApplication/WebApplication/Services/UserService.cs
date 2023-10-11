@@ -36,16 +36,21 @@ namespace Application.Services
             throw new ArgumentException("Entity Not Found");
         }
 
-        public async Task<User> Authenticate(AuthenticationDTO authentication)
+        public async Task<User> Authenticate(AuthenticationDTO authenticationDTO)
         {
-            if (AuthenticationService.IsAuthenticated(authentication))
+            var user = await this.GetByExpression(user => user.Email.Equals(authenticationDTO.Email));
+
+            if(user == null)
             {
-                await AuthenticationService.SignIn(
-                    await this.GetByExpression(user => user.Email.Equals(authentication.Email)) ?? 
-                );
+                throw new ArgumentException("User was not found");
             }
 
-            throw new ArgumentException("");
+            if (AuthenticationService.IsAuthenticated(authenticationDTO, user))
+            {
+                await AuthenticationService.SignIn(user);
+            }
+
+            throw new ArgumentException("Authentication failed");
         }
     }
 }

@@ -15,8 +15,8 @@ namespace Application.Services
             HttpContextAccessor = httpContextAccessor;
         }
 
-        public bool IsAuthenticated(AuthenticationDTO authenticationDTO) =>
-            true;        
+        public bool IsAuthenticated(AuthenticationDTO authenticationDTO, User user) =>
+            authenticationDTO.Password.Equals(user.Password);
 
         public async Task SignIn(User user)
         {
@@ -28,16 +28,16 @@ namespace Application.Services
             await httpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 GetClaimsPrincipal(user),
-                GetProperties()
+                AuthenticationProperties
             );
         }
 
-        private AuthenticationProperties GetProperties() => new AuthenticationProperties
-        {
-            AllowRefresh = true,
-            IssuedUtc = DateTimeOffset.Now,
-            //RedirectUri = <string> // TODO: try it out
-        };
+        private AuthenticationProperties AuthenticationProperties => new()
+            {
+                AllowRefresh = true,
+                IssuedUtc = DateTimeOffset.Now,
+                //RedirectUri = <string> // TODO: try it out
+            };
 
         private ClaimsPrincipal GetClaimsPrincipal(User user) =>
             new ClaimsPrincipal(
