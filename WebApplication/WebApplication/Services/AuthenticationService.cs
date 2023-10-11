@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Application.Models;
+using Application.Models.DTO;
 
 namespace Application.Services
 {
@@ -14,12 +15,10 @@ namespace Application.Services
             HttpContextAccessor = httpContextAccessor;
         }
 
-        public bool IsAuthenticated()
-        {
-            return true;
-        }
+        public bool IsAuthenticated(AuthenticationDTO authenticationDTO) =>
+            true;        
 
-        public async Task SignIn()
+        public async Task SignIn(User user)
         {
             HttpContext? httpContext = HttpContextAccessor.HttpContext;
 
@@ -28,7 +27,7 @@ namespace Application.Services
 
             await httpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                GetClaimsPrincipal(null),
+                GetClaimsPrincipal(user),
                 GetProperties()
             );
         }

@@ -1,4 +1,5 @@
 ﻿using Application.Models;
+using Application.Models.DTO;
 using Application.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -9,12 +10,13 @@ namespace Application.Services
     {
         private readonly DbSet<User> DBSet;
         private readonly IUnitOfWork UnitOfWork;
+        private readonly AuthenticationService AuthenticationService;
 
-        public UserService(IUnitOfWork unitOfWork) =>
-            (UnitOfWork, DBSet) = (unitOfWork, unitOfWork.Repository<User>().DBSet);
+        public UserService(IUnitOfWork unitOfWork, AuthenticationService authenticationService) =>
+            (UnitOfWork, DBSet, AuthenticationService) = (unitOfWork, unitOfWork.Repository<User>().DBSet, authenticationService);
 
-        public User? GetByExpression(Expression<Func<User, bool>> expression) =>
-            DBSet.Where(expression).FirstOrDefault();
+        public async Task<User?> GetByExpression(Expression<Func<User, bool>> expression) =>
+            await DBSet.FirstOrDefaultAsync(expression);
 
         public async Task<User> RefreshLastSignin(string? email)
         {
@@ -34,5 +36,16 @@ namespace Application.Services
             throw new ArgumentException("Entity Not Found");
         }
 
+        public async Task<User> Authenticate(AuthenticationDTO authentication)
+        {
+            if (AuthenticationService.IsAuthenticated(authentication))
+            {
+                await AuthenticationService.SignIn(
+                    await this.GetByExpression(user => user.Email.Equals(authentication.Email)) ?? 
+                );
+            }
+
+            throw new ArgumentException("");
+        }
     }
 }

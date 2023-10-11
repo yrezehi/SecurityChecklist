@@ -23,6 +23,7 @@ builder.Services.AddSingleton(typeof(FailedAttemptsEventHandler), typeof(FailedA
 builder.Services.AddSingleton(typeof(TerminateSessionEventHandler), typeof(TerminateSessionEventHandler));
 
 builder.Services.AddTransient(typeof(UserService), typeof(UserService));
+builder.Services.AddTransient(typeof(AuthenticationService), typeof(AuthenticationService));
 
 builder.RegisterSecurityLayer();
 
