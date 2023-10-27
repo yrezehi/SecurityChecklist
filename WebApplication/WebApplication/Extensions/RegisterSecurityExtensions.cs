@@ -8,6 +8,8 @@ namespace Application.Extensions
         public static void RegisterSecurityLayer(this WebApplicationBuilder application)
         {
             application.RegisterCookieAuthentication();
+
+            application.Services.AddTransient(typeof(CookieAuthenticationEvent), typeof(CookieAuthenticationEvent));
         }
 
         private static void RegisterCookieAuthentication(this WebApplicationBuilder builder)
