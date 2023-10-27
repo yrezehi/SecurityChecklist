@@ -27,6 +27,7 @@ builder.Services.AddTransient(typeof(UserService), typeof(UserService));
 builder.Services.AddTransient(typeof(AuthenticationService), typeof(AuthenticationService));
 
 builder.RegisterSecurityLayer();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

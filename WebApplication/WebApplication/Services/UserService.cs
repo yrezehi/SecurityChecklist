@@ -48,6 +48,8 @@ namespace Application.Services
             if (AuthenticationService.IsAuthenticated(authenticationDTO, user))
             {
                 await AuthenticationService.SignIn(user);
+
+                return user;
             }
 
             throw new ArgumentException("Authentication failed");

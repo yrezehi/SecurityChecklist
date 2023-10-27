@@ -11,8 +11,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.11" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Captcha\" />
-  </ItemGroup>
-
 </Project>

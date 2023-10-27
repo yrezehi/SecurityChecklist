@@ -10,10 +10,8 @@ namespace Application.Services
     {
         private readonly IHttpContextAccessor HttpContextAccessor;
 
-        public AuthenticationService(IHttpContextAccessor httpContextAccessor)
-        {
+        public AuthenticationService(IHttpContextAccessor httpContextAccessor) =>
             HttpContextAccessor = httpContextAccessor;
-        }
 
         public bool IsAuthenticated(AuthenticationDTO authenticationDTO, User user) =>
             authenticationDTO.Password.Equals(user.Password);
@@ -36,7 +34,6 @@ namespace Application.Services
             new () {
                 AllowRefresh = true,
                 IssuedUtc = DateTimeOffset.Now,
-                //RedirectUri = <string> // TODO: try it out
             };
 
         private ClaimsPrincipal GetClaimsPrincipal(User user) =>

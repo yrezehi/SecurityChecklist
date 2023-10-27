@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Application.Events;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Application.Extensions
 {
@@ -21,6 +22,7 @@ namespace Application.Extensions
                 options.Cookie.HttpOnly = true; // OWASP-A01
                 options.ExpireTimeSpan = TimeSpan.FromHours(60); // OWASP-A01
                 options.SlidingExpiration = false; // OWASP-A01
+                options.EventsType = typeof(CookieAuthenticationEvent);
             });
         }
     }
